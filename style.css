@@ -1,0 +1,897 @@
+:root{
+    --bg: linear-gradient(135deg, #4facfe,#00f2fe);
+    --card: #ffffff;
+    --maintext: #0f2a44;
+    --mutedtext: #4a6fa5;
+    --border: #dbeafe;
+    --shadow: 0 15px 22px rgba(79, 172, 254, 0.534);
+    --hoverbg: #eaf7ff;
+    --hoverborder: #8fd3ff;
+    --hovershadow: 0 10px 26px rgba(79, 172, 254, 0.35);
+    --btnbg: linear-gradient(135deg, #4facfe,#00f2fe);
+    --btnbghover: #0f5fa8;
+    --btntext: #000000; 
+    --primary:#2c3e50;
+    --secondary:#3498db;
+    --danger:#e74c3c; 
+    --success:#27ae60; 
+    --light:#ecf0f1; 
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    margin: 0;
+    font-family: "cairo", Arial, Helvetica, sans-serif;
+    transition: all 1s ease;
+    direction: rtl;
+}
+
+.page{
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: none;
+    overflow: hidden;
+}
+#signpage{
+    height: 100vh;
+}
+
+.continer{
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border: 3px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    animation: ani 1.5s  ease;
+    margin: 20px;
+}
+
+
+@keyframes ani {
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.continer h2 {
+    color: var(--maintext);
+    margin-bottom: 10px;
+}
+
+.continer p {
+    color: var(--mutedtext);
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.inputgroup{
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.inputgroup input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.inputgroup label{
+    color: #ccc;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--card);
+    transition: 0.3s;
+}
+
+.inputgroup input:focus+label,
+.inputgroup input:valid+label{
+    top: -5px;
+    right: 5px;
+    font-size: 15px;
+    color: #4facfe;
+}
+
+input[type="submit"] , .btntwo{
+    width: 100%;
+    border: none;
+    background: var(--btnbg);
+    padding: 10px;
+    border-radius: 20px;
+    color: var(--btntext);
+    font-size: 20px;
+    transition: 1s;
+    margin-bottom: 10px;
+}
+
+input[type="submit"]:hover, .btntwo:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.waytwo span{
+    display: block;
+    margin-bottom: 10px;
+    color: var(--mutedtext);
+}
+
+.radiobox{
+    margin: 10px;
+    width: 100%;
+    position: relative;
+    height: 40px;
+}
+
+.radiobox label{
+    margin: 20px;
+    font-size: large;
+    position: absolute;
+    z-index: 5;
+}
+
+#forstudent{
+    top: -13px;
+    right: 20%;
+}
+
+#forteacher{
+    top: -13px;
+    left: 20%;
+}
+
+#cheked{
+    background: var(--bg);
+    height: 30px;
+    width: 25%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.radiobox #student:checked ~ #cheked{
+    left: 55%;
+}
+
+.radiobox #teacher:checked ~ #cheked{
+    left: 20%;
+}
+
+#mainpage{
+    /* display: block; */
+    height: 100dvh;
+    height: 100vh;
+    position: relative;
+}
+
+header{
+    background: var(--card);
+    margin: 10px;
+    border-radius: 10px;
+    height: 10%;
+    direction: ltr;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+h1{
+    display: inline-block;
+}
+
+header button{
+    height: 30px;
+    width: 30px;
+    border:none;
+    background: var(--btnbg);
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 1s;
+}
+
+main{
+    background: var(--card);
+    height: calc(100% - 20% - 40px);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+footer{
+    background: var(--card);
+    margin: 10px;
+    border-radius: 10px;
+    height: 10%;
+    direction: ltr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+footer a{
+    font-size: 20px;
+    text-decoration: none;
+    word-spacing: 5px;
+    color: var(--btntext);
+    background-color: #5cff5c;
+    padding: 10px;
+    height: 100%;
+    border-radius: 30px;
+}
+
+nav{
+    display:none;
+    height: calc(100% - 20px);
+    width: 310px;
+    background: var(--card);
+    border-radius: 10px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    overflow: auto;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    z-index: 5555555;
+}
+
+#ulfoteacher{
+    display: none;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#signout{
+    border: none;
+    background: var(--btnbg);
+    color: var(--btntext);
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+    transition: all 0.6s ease;
+}
+
+button:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--hovershadow);
+}
+
+li{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 15px auto;
+    display: block;
+    border-radius: 20px;
+    background: var(--card);
+    transition: all 1s;
+}
+
+li:hover{
+    background: var(--btnbg);
+}
+
+.content{
+    height: calc(100% - 20px);
+    padding: 0;
+    margin: 0;
+    display: none;
+    overflow: auto;
+}
+
+#sendreview{
+    width: 95%;
+    display: block;
+    margin: 15px auto;
+    border: none;
+    background: var(--bg);
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.5s;
+    height: 50px;
+}
+
+#headofreview{
+    width: 95%;
+    margin: 20px auto;
+    position: relative;
+    height: 50px;
+}
+
+#sendreviewpage #headofreview input{
+    width: 40%;
+    display: inline-block;
+    border: #ccc solid 1px ;
+    padding: 10px;
+    border-radius: 20px;
+    height: 50px;
+    position: absolute;
+}
+
+#reviewtitle{
+    right: 0;
+}
+
+#reviewwriter{
+    left: 0;
+}
+
+#sendreviewpage textarea{
+    resize: none;
+    width: 95%;
+    display: block;
+    padding: 20px;
+    margin: auto;
+    border-radius: 20px;
+    height: calc(100% - 100px - 70px);
+}
+
+.header{
+    background: var(--bg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+.header img {
+    height: 100px;
+}
+
+#infopage > p{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+section{
+    background: white;
+    box-shadow:0 4px 15px rgba(0, 0, 0, 0.25);
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+section:hover{
+    transform: translateY(-5px);
+    box-shadow:0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+section h3{
+    text-align: center;
+    margin: 10px auto;
+    transition: all 0.3s ease;
+}
+
+
+section:hover >h3{
+    font-size: 20px;
+    word-spacing: 5px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:16px;
+    border:1px solid #eee;
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+#sendqupage h2{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.subjects{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.cardqu{
+    border:2px solid #ddd;
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    font-size: 20px;
+}
+
+.cardqu input{
+    display:none;
+}
+
+.cardqu.active , #sendquizpage  .subject-card.active{
+    background: var(--bg);
+    border-color: var(--bg);
+    color:white;
+}
+
+
+#sendqupage textarea, input{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    resize: none;
+    font-size: 20px;
+}
+
+#sendqupage button{
+    width:100%;
+    padding:12px;
+    background: var(--bg);
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+    transition: all 0.5s ease;
+    font-size: 20px;
+}
+
+#sendqupage button:disabled{
+    background:gray;
+}
+
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+#sendquizpage .subject-card{
+    border:2px solid #ddd;
+    border-radius:8px;
+    padding:8px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    font-size: 20px;
+}
+
+.subject-card input{ 
+    display:none; 
+}
+
+#sendquizpage input, textarea{
+    width:100%;
+    padding:10px;
+    resize: none;
+    margin:5px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    transition: all 0.5s;
+    font-size: 20px;
+}
+
+#sendquizpage button{
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin:15px auto;
+    transition: all 0.5s;
+    font-size: 20px;
+}
+
+.delete-btn{ 
+    background:#dc3545; 
+    color:white; 
+}
+
+.edit-btn{ 
+    background:#ffc107; 
+}
+
+.add-btn{
+    background:#28a745; 
+    color:white; 
+    width: 100%;
+}
+
+.save-btn{ 
+    background:#007bff;
+    color:white;
+    width: 100%;
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
+
+.question-card{
+    background:#f8f9fa;
+    padding:10px;
+    border-radius:8px;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.hidden{
+    display:none; 
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:15px;
+    margin:auto;
+}
+
+
+#qupage .subject-card{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+    transition:0.3s;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#qupage .subject-card:hover{
+    transform:translateY(-6px);
+    background: var(--bg);
+    color:white;
+}
+
+#qupage .subject-card:hover img{
+    transform: rotateY(360deg);
+}
+
+#qupage .questions-box{
+    max-width:800px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+#qupage .question-item{
+    margin-bottom:25px;
+}
+
+#qupage .option{
+    margin:6px 0;
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    cursor:pointer;
+}
+
+#qupage .option.correct{
+    background:#d4edda;
+    border-color:#28a745;
+}
+
+#qupage .option.wrong{
+    background:#f8d7da;
+    border-color:#dc3545;
+}
+
+/* زر الرجوع */
+#qupage .circle-back{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:none;
+    background:#007bff;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:10px;
+    transition:0.3s;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+#qupage .circle-back:hover{
+    background:var(--bg);
+    transform:scale(1.1);
+}
+
+#qupage img ,#quizpage img{
+    height: 200px;
+    transition: all 0.5s;
+}
+
+#quizpage .cards-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:20px;
+}
+
+#quizpage .card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#quizpage .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    background:var(--bg);
+    color:#fff;
+}
+
+#quizpage .card:hover img {
+    transform: rotateY(360deg);
+}
+
+#quizpage .exam-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    cursor:pointer;
+    margin-bottom:15px;
+    transition:0.3s;
+}
+
+#quizpage .exam-card:hover{
+    transform:translateX(5px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+#quizpage .timer{
+    font-size:22px;
+    font-weight:bold;
+    color:#d9534f;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+#quizpage #backBtn{
+    background:var(--bg);
+    color:white;
+    border:none;
+    border-radius:50%;
+    width:50px;
+    height:50px;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-bottom:20px;
+}
+
+#quizpage #backBtn:hover{
+    background:var(--bg);
+}
+
+#quizpage .question-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.1);
+    margin-bottom:15px;
+}
+
+#quizpage .question-text{
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+#quizpage .options label{
+    display:block;
+    padding:10px 12px;
+    margin-bottom:8px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#quizpage .options label:hover{
+    background:#f1f1f1;
+}
+
+#quizpage .options input{
+    display:none;
+}
+#quizpage .options label.selected span{
+    background:var(--bg);
+    color:white;
+    padding:8px;
+    border-radius:6px;
+}
+
+#quizpage button.finish-btn{
+    width:100%;
+    padding:12px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+    margin-top:10px;
+}
+
+#quizpage button.finish-btn:hover{
+    background:#218838;
+}
+
+#quizpage .loading{
+    text-align:center;
+    font-size:18px;
+    color:var(--bg);
+    margin:20px 0;
+}
+
+#reviewpage .container{
+    margin:auto;
+    padding:15px;
+}
+
+#reviewpage button{
+    background:var(--bg);
+    color:#fff;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    display: inline-block;
+    margin: auto;
+}
+
+#reviewpage .card{
+    background:#fff;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:15px;
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+    cursor:pointer;
+    transition:.25s;
+    width: 100%;
+}
+#reviewpage .card:hover{
+    transform:translateY(-4px);
+}
+#reviewpage .title{
+    font-size:17px;
+    font-weight:bold;
+}
+#reviewpage .author{
+    font-size:14px;
+    color:#666;
+    margin-top:4px;
+}
+#reviewpage .article{
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 10px 22px rgba(0,0,0,.1);
+}
+#reviewpage .article h2{
+    margin-top:0;
+}
+#reviewpage .back{
+    margin-top:15px;
+    background:#555;
+}
+#reviewpage .loading{
+    text-align:center;
+    color:#777;
+    margin-top:30px;
+}
+
+#tomainpage{
+    width:100%;
+    margin: 20px auto;
+}
+
+#adminpage{
+    height: 100vh;
+    padding: 20px;
+    overflow: auto;
+}
+
+#toadminpage{
+    border: none;
+    background: var(--btnbg);
+    color: var(--btntext);
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+    transition: all 0.6s ease;
+    display: none;
+}
+
+#adminpage h2 { text-align:center; color:var(--primary); margin-bottom:30px; border-bottom:2px solid var(--secondary); padding-bottom:10px; }
+
+/* العدادات */
+#adminpage .stats-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:15px; margin-bottom:30px; }
+#adminpage .stat-card { background:white; padding:20px; border-radius:12px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,0.1); border-top:5px solid var(--secondary); transition:0.3s; }
+#adminpage .stat-card h3 { margin:0; font-size:0.9rem; color:#7f8c8d; }
+#adminpage .stat-card p { font-size:2.2rem; font-weight:bold; margin:10px 0 0; color:var(--primary); }
+
+/* الأزرار */
+#adminpage .controls { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:25px; }
+#adminpage button { padding:12px 20px; cursor:pointer; border:none; border-radius:8px; background:var(--primary); color:white; font-weight:bold; }
+#adminpage button:hover { opacity:0.9; }
+#adminpage .btn-show { background:var(--secondary); }
+#adminpage .delete-btn { background:var(--danger); padding:5px 15px; font-size:0.8rem; margin-top:10px; border-radius:4px; }
+
+/* منطقة العرض */
+#adminpage .content-area { background:white; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05); min-height:200px; }
+#adminpage .item-card { background:#fff; border:1px solid #eee; padding:15px; margin-bottom:15px; border-radius:8px; border-right:5px solid var(--secondary); }
+#adminpage .details-box { display:none; margin-top:15px; padding:15px; background:#f7f9fb; border:1px dashed #ccc; border-radius:8px; }
+#adminpage .question-box { background:#f0f3f7; padding:10px 15px; border-radius:6px; margin-bottom:10px; border-left:4px solid var(--secondary); }
+#adminpage .question-box strong { display:block; margin-bottom:5px; color:var(--primary); }
+#adminpage .badge { background:#eef2f7; padding:4px 10px; border-radius:6px; font-size:0.85rem; color:#34495e; margin-left:5px; border:1px solid #dcdde1; }

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="موقع تعلمي للصف الأول الثانوي كامل متكامل يحتوي علي تلخيصات للدروس (مقالات) و بنك أسئلة كامل متكامل في جميع المواد وايضا قائمة إمتحانات في جميع المواد معدة من مدرسين مستخدمين البرنامج أيضا  وهذا هو الجزء الخاص بالطلاب اما الجزء الخاص بالطلاب فهو انه يمكن إرسال كلا من الشروحات والأسئلة و الإمتحنات وفي حالة المدرس لم يرسل ايا من هذد الأشياء المستخم الرئيسي يرسل له إنذار في حالة عدم الرد عليه يتم حذف المدرس ">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Alatar Educational Academy </title>
+        <link rel="icon" type="image/webp" href="pictures/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="media.css">
+    </head>
+    <body>
+        <div class="page" id="signpage">
+            <div class="continer">
+                <h2>Alatar Educational Academy </h2>
+                <p>سجل دخول وتعلم بذكاء</p>
+                <form id="signform">
+                    <div class="inputgroup">
+                        <input type="email" name="email" id="useremail" required>
+                        <label for="useremail"> الإيميل</label>
+                    </div>
+                    <div class="inputgroup">
+                        <input type="password" name="password" id="userpassword" required>
+                        <label for="userpassword">الرمز السري</label>
+                    </div>
+                    <input type="submit" value="تسجيل دخول ">
+                    <p id="loadingforsign" hidden>جاري تسجيل دخول ⏳....</p>
+                </form>
+                <div class="waytwo" id="createpage">
+                    <span>ليس لديك حساب؟</span>
+                    <button class="btntwo" id="tocreateuserpage">إنشاء حساب</button>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="createuserpage">
+            <div class="continer">
+                <h2>Alatar Educational Academy</h2>
+                <p>أنشاء حسابك و تعلم بذكاء</p>
+                <form id="createform">
+                    <div class="inputgroup">
+                        <input type="text" name="name" id="name" required> 
+                        <label for="name">اسم المستخدم</label>
+                    </div>
+                    <div class="inputgroup">
+                        <input type="email" name="email" id="email" required> 
+                        <label for="email">الإيميل</label>
+                    </div>
+                    <div class="inputgroup">
+                        <input type="tel" name="phone" id="phone" required> 
+                        <label for="phone">رقم الهاتف</label>
+                    </div>
+                    <div class="inputgroup">
+                        <input type="password" name="password" id="password" required> 
+                        <label for="password">كلمة المرور</label>
+                    </div>
+                    <div class="inputgroup">
+                        <input type="password" name="surepassword" id="surepassword" required> 
+                        <label for="surepassword">تأكيد كلمة المرور</label>
+                    </div>
+                    <div class="radiobox">
+                        <input type="radio" name="role" id="student" checked value="student" hidden>
+                        <label for="student" id="forstudent">طالب</label>
+                        <input type="radio" name="role" id="teacher" value="teacher" hidden>
+                        <div id="cheked"></div>
+                        <label for="teacher" id="forteacher">مدرس</label>
+                    </div>
+                    <p id="loadingforcreate" hidden>جاري  إنشاء الحساب ...</p>
+                    <input type="submit" value="إنشاء حساب">
+                </form>
+                <div class="waytwo" id="signway">
+                    <span>لديك حساب ؟ </span>
+                    <button class="btntwo" id="tosignpage">العودة</button>
+                </div>
+            </div>
+        </div> 
+        <div id="adminpage" class="page">
+            
+            <h2>لوحة تحكم أكاديمية العطار</h2>
+            
+            <div class="stats-container">
+            <div class="stat-card"><h3>المدرسين</h3><p id="count-teachers">0</p></div>
+            <div class="stat-card"><h3>الطلاب</h3><p id="count-students">0</p></div>
+            <div class="stat-card"><h3>المقالات</h3><p id="count-reviews">0</p></div>
+            <div class="stat-card" style="border-top-color: var(--success);"><h3>إجمالي الأسئلة</h3><p id="count-questions">0</p></div>
+            <div class="stat-card" style="border-top-color: var(--success);"><h3>إجمالي الامتحانات</h3><p id="count-exams">0</p></div>
+            </div>
+            <button class="btn-show" id="tomainpage">زيارة الموقع</button>
+            
+            <div class="controls">
+            <button class="btn-show" onclick="showData('teachers')">عرض المدرسين</button>
+            <button class="btn-show" onclick="showData('students')">عرض الطلاب</button>
+            <button class="btn-show" onclick="showData('reviews')">عرض المقالات</button>
+            <button class="btn-show" onclick="showData('questions')">عرض الأسئلة</button>
+            <button class="btn-show" onclick="showData('exams')">عرض الامتحانات</button>
+            </div>
+            
+            <div class="content-area" id="display-panel">
+            <p style="text-align:center; color:#999;">اختر قسماً لعرض بياناته...</p>
+            </div>
+        </div>
+        <div class="page" id="mainpage">
+            <header>
+                <h1>Alatar Educational Academy</h1>
+                <button id="menubutton">&#9776</button>
+            </header>
+            <nav>
+                <ul id="ulfoteacher">
+                    <li id="tosendreviewpage">إرسال مقال </li>
+                    <li id="tosendqupage">إرسال سؤال</li>
+                    <li id="tosendquizpage">إرسال امتحان</li>
+                </ul>
+                <ul id="ulforstudent">
+                    <li id="toreviewpage">المقالات</li>
+                    <li id="toqupage">بنك الأسئلة</li>
+                    <li id="toquizpage">الإمتحانات</li>
+                    <li id="toinfopage">المعلومات</li>
+                </ul>
+                <button id="toadminpage">العودة للوحة</button>
+                <button id="signout">تسجيل خروج &#10162</button>
+            </nav>
+            <main id="contient">
+                <div id="sendreviewpage" class="content">
+                    <div id="headofreview">
+                        <input type="text" id="reviewtitle" placeholder="عنوان المقال ">
+                        <input type="text" id="reviewwriter" placeholder="اسم الؤلف ">
+                    </div>
+                    <textarea id="reviewbody" placeholder="أدخل جسم المقال هنا ...."></textarea>
+                    <p id="loadingforreview" hidden>جاري إرسال المقال ....</p>
+                    <button id="sendreview">إرسال المقال</button>
+                </div>
+                <div id="sendqupage" class="content">
+                    <form  id="questionform">
+                        <h2>إنشاء سؤال</h2>
+                        
+                        <div class="subjects" id="subjects">
+                            <label class="cardqu"><input type="radio" name="subject" value="arabic">لغة عربية</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="english">لغة إنجليزية</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="math">رياضيات</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="philosophy">فلسفة</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="science">علوم</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="history">تاريخ</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="programming">برمجة</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="religion">تربية دينية</label>
+                            <label class="cardqu"><input type="radio" name="subject" value="french">لغة فرنسية</label>
+                        </div>
+                        
+                        <textarea id="question" placeholder="اكتب السؤال"></textarea>
+                        
+                        <input id="opt1" placeholder="الاختيار الأول">
+                        <input id="opt2" placeholder="الاختيار الثاني">
+                        <input id="opt3" placeholder="الاختيار الثالث">
+                        <input id="opt4" placeholder="الاختيار الرابع">
+                        
+                        <input type="number" id="correct" min="1" max="4" placeholder="رقم الإجابة الصحيحة (1-4)">
+                        
+                        
+                    </form>
+                    <button id="createBtn" class="submit">إنشاء السؤال</button>
+                    
+                </div>
+                <div id="sendquizpage" class="content">
+                    <form id="sendquiestion">
+                        
+                        <h2>إنشاء امتحان</h2>
+                        
+                        <div class="subject-grid">
+                            <label class="subject-card"><input type="radio" name="sub" value="arabic">لغة عربية</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="english">لغة إنجليزية</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="math">رياضيات</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="philosophy">فلسفة</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="science">علوم</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="history">تاريخ</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="programming">برمجة</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="religion">تربية دينية</label>
+                            <label class="subject-card"><input type="radio" name="sub" value="french">لغة فرنسية</label>
+                        </div>
+                        
+                        <input type="text" placeholder="اسم الامتحان" data-exam-title>
+                        <input type="number" placeholder="مدة الامتحان بالدقائق" data-duration>
+                        
+                        <hr>
+                        
+                        <h3>إضافة سؤال</h3>
+                        
+                        <textarea placeholder="السؤال" data-q></textarea>
+                        <input type="text" placeholder="اختيار 1" data-o1>
+                        <input type="text" placeholder="اختيار 2" data-o2>
+                        <input type="text" placeholder="اختيار 3" data-o3>
+                        <input type="text" placeholder="اختيار 4" data-o4>
+                        <input type="number" placeholder="رقم الإجابة الصحيحة (1-4)" data-correct>
+                    </form>
+                    
+                    <button class="add-btn" data-add >إضافة سؤال</button>
+                    
+                    <div data-questions-list></div>
+                    
+                    <button class="save-btn" data-save>حفظ الامتحان</button>
+                    
+                </div>
+                <div id="reviewpage" class="content">
+                    <h2>📝 المقالات</h2>
+                    <div class="container" id="app">
+                        <button id="loadBtn">عرض المقالات</button>
+                    </div>
+                </div>
+                <div id="qupage" class="content">
+                    <div id="subjectsView">
+                        <h2>صفحة الأسئلة </h2>
+                        <div class="cards">
+                            <div class="subject-card" data-sub="arabic">
+                                <img src="pictures/book-open-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                لغة عربية</div>
+                            <div class="subject-card" data-sub="english">
+                                <img src="pictures/ABC.svg" alt="خطأ في جلب الرموز ">
+                                لغة إنجليزية
+                            </div>
+                            <div class="subject-card" data-sub="math">
+                                <img src="pictures/calculator-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                رياضيات</div>
+                            <div class="subject-card" data-sub="philosophy">
+                                <img src="pictures/brain-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                فلسفة</div>
+                            <div class="subject-card" data-sub="science">
+                                <img src="pictures/flask-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                علوم</div>
+                            <div class="subject-card" data-sub="history">
+                                <img src="pictures/landmark-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                تاريخ</div>
+                            <div class="subject-card" data-sub="programming">
+                                <img src="pictures/code-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                برمجة</div>
+                            <div class="subject-card" data-sub="religion">
+                                <img src="pictures/mosque-solid-full.svg" alt="خطأ في جلب الرموز ">
+                                تربية دينية</div>
+                            <div class="subject-card" data-sub="french">
+                                <img src="pictures/FR.svg" alt="خطأ في جلب الرموز ">
+                                لغة فرنسية</div>
+                        </div>
+                    </div>
+                    
+                    <!-- صفحة الأسئلة -->
+                    <div id="questionsView" class="hidden">
+                        <button class="circle-back" id="backToSubjects">⟵</button>
+                        <h2 id="subjectTitle"></h2>
+                    
+                        <div class="questions-box" id="questionContainer"></div>
+                    </div>
+                    
+                </div>
+                <div id="quizpage" class="content">
+                    <h2>صفحة الإختبارات</h2>
+                    <div class="cards-grid" id="subjectsGrid">
+                        <div class="card" data-subject="arabic">
+                            <img src="pictures/book-open-solid-full.svg" alt="خطأ في جلب الرمز">
+                            لغة عربية</div>
+                        <div class="card" data-subject="english">
+                            <img src="pictures/ABC.svg" alt="خطأ في جلب الرمز">
+                            لغة إنجليزية</div>
+                        <div class="card" data-subject="math">
+                            <img src="pictures/calculator-solid-full.svg" alt="خطأ في جلب الرمز">
+                            رياضيات</div>
+                        <div class="card" data-subject="philosophy">
+                            <img src="pictures/brain-solid-full.svg" alt="خطأ في جلب الرمز">
+                            فلسفة</div>
+                        <div class="card" data-subject="science">
+                            <img src="pictures/flask-solid-full.svg" alt="خطأ في جلب الرمز">
+                            علوم</div>
+                        <div class="card" data-subject="history">
+                            <img src="pictures/landmark-solid-full.svg" alt="خطأ في جلب الرمز">
+                            تاريخ</div>
+                        <div class="card" data-subject="programming">
+                            <img src="pictures/code-solid-full.svg" alt="خطأ في جلب الرمز">
+                            برمجة</div>
+                        <div class="card" data-subject="religion">
+                            <img src="pictures/mosque-solid-full.svg" alt="خطأ في جلب الرمز">
+                            تربية دينية</div>
+                        <div class="card" data-subject="french">
+                            <img src="pictures/FR.svg" alt="خطأ في جلب الرمز">
+                            لغة فرنسية</div>
+                    </div>
+                </div>
+                <div id="infopage" class="content">
+                    <div class="header">
+                        <img src="pictures/logo.png" alt="loge of web">
+                    </div>
+                    <p>يحتوي البرنامج التعليمي علي من الأقسام التعليمية و في ما يلي شرح لكل قسم :</p>
+                    <div id="sectionforteagher">
+                        <section>
+                            <h3>قسم إرسال المقالات</h3>
+                            <P>في هذا القسم يحق للمدرس كتابة مقالات او تلخيص درس او اي معلومات يريد إرسالها للطلاب ويمكن لكل الطلاب والمدرسين الأ خرين رؤيتها والإستفادة منها </P>
+                        </section>
+                        <section>
+                            <h3>قسم إضافة السؤال</h3>
+                            <P>في هذا القسم يمكن للمدرس إضافة أسئلة في بنك الأسئلة الذي يظهر لجميع المستخدمين </P>
+                        </section>
+                        <section>
+                            <h3>قسم إضافة الإمتحان </h3>
+                            <P>في هذا القسم يمكن للمدرس إنشاء امتحان بعدد الأسئلة الذي يريد وبالوقت الذي يريد ليضاف إلي صفحة الإختبارات لحلها</p>
+                        </section>
+                    </div>
+                    <section>
+                        <h3>قسم فيديوهات الشرح</h3>
+                        <p>في هذا القسم يمكن للطلاب الصف الأول الثانوي مشاهدة فيديوهات شرح لجميع المواد مختاره ومضافه من قبل صاحب التطبيق</p>
+                    </section>
+                    <section>
+                        <h3>قسم المقالات </h3>
+                        <p>في هذا القسم يمكن للطالب  قراءة  المقالات و الشروحات الذي كتبها المدرسين </p>
+                    </section>
+                    <section>
+                        <h3>قسم بنك الأسئلة </h3>
+                        <p> في هذا القسم يمكن للطالب حل أسئلة في جميع المواد معدة من قبل المدرسين</p>
+                    </section>
+                    <section>
+                        <h3>قسم الإمتحانات </h3>
+                        <p> في هذا القسم يمكن للطلاب حل امتحنات وضعها المدرسين </p>
+                    </section>
+                </div>
+            </main>
+            <footer>
+                <a href="https://wa.me/201119350054" target="_blank"> 
+                    &#128172;تواصل معنا علي الواتس اب
+                </a>
+            </footer>
+        </div>
+        <script src="main.js"></script>
+        <script type="module" src="firebase.js"></script>
+    </body>
+</html>
