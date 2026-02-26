@@ -492,19 +492,20 @@ document.getElementById("backToSubjects").onclick = ()=>{
   questionsView.classList.add("hidden");
   subjectsView.classList.remove("hidden");
 };
-//=====download quiz========
+//=================///////======================download quiz========
 const mainContainer = document.getElementById("quizpage");
 const originalHTML = mainContainer.innerHTML;
 
-/* ================== تعديل: فانكشن الرجوع ================== */
+/* ================== فانكشن الرجوع ================== */
 function goHome(){
   mainContainer.innerHTML = originalHTML;
   attachSubjectEvents();
 }
 
-/* ================== تعديل: ربط أحداث المواد ================== */
+/* ================== ربط أحداث المواد ================== */
 function attachSubjectEvents(){
   const subjectsGrid = document.getElementById("subjectsGrid");
+  if(!subjectsGrid) return;
   subjectsGrid.querySelectorAll(".card").forEach(card=>{
     card.onclick = ()=>loadExams(card);
   });
@@ -512,16 +513,14 @@ function attachSubjectEvents(){
 
 attachSubjectEvents();
 
-/* ================== تعديل: تحميل الامتحانات ================== */
+/* ================== تحميل الامتحانات ================== */
 async function loadExams(card){
   const subject = card.dataset.subject;
-
   mainContainer.innerHTML = `
     <button id="backBtn">←</button>
     <h2>جاري تحميل الامتحانات...</h2>
     <div class="loading">انتظر قليلاً</div>
   `;
-
   document.getElementById("backBtn").onclick = goHome;
 
   const snap = await get(ref(db, "exams/" + subject));
@@ -532,7 +531,6 @@ async function loadExams(card){
     <h2>${card.textContent}</h2>
     <div class="cards-grid" id="examsGrid"></div>
   `;
-
   document.getElementById("backBtn").onclick = goHome;
 
   if(!exams){
@@ -549,60 +547,56 @@ async function loadExams(card){
   });
 }
 
-/* ================== تعديل: بدء الامتحان بدون reload ================== */
+/* ================== بدء الامتحان ================== */
 async function startExam(subject,examId,examData){
   mainContainer.innerHTML=`
     <button id="backBtn">←</button>
-    <h2>${examData.title}</h2>
-    <div class="timer" id="timer" style="font-weight:bold; color:red; margin:10px;"></div>
-    <div id="questionsContainer" class="loading">جاري تحميل الأسئلة...</div>
+    <h2 id="examTitle">${examData.title}</h2>
+    <div class="timer" id="timer" style="font-weight:bold; color:red; margin:10px; text-align:center; font-size:20px;"></div>
+    <div id="questionsContainer">جاري تحميل الأسئلة...</div>
     <button class="finish-btn" id="finishBtn">إنهاء الامتحان</button>
   `;
 
-  // --- كود التيمر المضاف ---
   let timeLeft = Math.floor(examData.duration * 60);
   const timerDiv = document.getElementById("timer");
-
   const timerInterval = setInterval(() => {
     const mins = Math.floor(timeLeft / 60);
     const secs = timeLeft % 60;
-    timerDiv.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    
+    timerDiv.textContent = `الوقت المتبقي: ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-      alert("انتهى الوقت!");
-      finishExam(); // إنهاء تلقائي
+      finishExam();
     }
     timeLeft--;
   }, 1000);
 
-  // تحديث زر الرجوع ليمسح التيمر
   document.getElementById("backBtn").onclick = () => {
-    clearInterval(timerInterval);
-    goHome();
+    if(confirm("هل تريد الخروج؟ لن يتم حفظ إجاباتك.")){
+      clearInterval(timerInterval);
+      goHome();
+    }
   };
-  // -----------------------
 
   const snap = await get(ref(db,`exams/${subject}/${examId}/questions`));
   const questions = snap.val();
   const qc = document.getElementById("questionsContainer");
   qc.innerHTML="";
-
   const answers=[];
 
-  questions.forEach((q,i)=>{
-    const d=document.createElement("div");
-    d.className="question-card";
-    d.innerHTML=`<div class="question-text">${i+1}- ${q.question}</div>`;
-    const ops=document.createElement("div");
-    ops.className="options";
-    q.options.forEach((o,j)=>{
-      const l=document.createElement("label");
-      l.innerHTML=`<input type="radio" name="q${i}" value="${j+1}"><span>${o}</span>`;
-      l.querySelector("input").onchange=e=>{
-        ops.querySelectorAll("label").forEach(x=>x.classList.remove("selected"));
+  questions.forEach((q, i) => {
+    const d = document.createElement("div");
+    d.className = "question-card";
+    d.id = `qCard${i}`;
+    d.innerHTML = `<div class="question-text">${i + 1}- ${q.question}</div>`;
+    const ops = document.createElement("div");
+    ops.className = "options";
+    q.options.forEach((o, j) => {
+      const l = document.createElement("label");
+      l.innerHTML = `<input type="radio" name="q${i}" value="${j + 1}"><span>${o}</span>`;
+      l.querySelector("input").onchange = e => {
+        ops.querySelectorAll("label").forEach(x => x.classList.remove("selected"));
         l.classList.add("selected");
-        answers[i]=+e.target.value;
+        answers[i] = +e.target.value;
       };
       ops.appendChild(l);
     });
@@ -610,14 +604,48 @@ async function startExam(subject,examId,examData){
     qc.appendChild(d);
   });
 
-  document.getElementById("finishBtn").onclick=finishExam;
+  document.getElementById("finishBtn").onclick = finishExam;
 
   async function finishExam(){
-    clearInterval(timerInterval); // إيقاف التيمر عند الإنهاء اليدوي
-    let score=0;
-    questions.forEach((q,i)=>{ if(answers[i]===q.correctAnswer) score++; });
-    alert(`درجتك ${score} من ${questions.length}`);
-    goHome();
+    clearInterval(timerInterval);
+    let score = 0;
+    
+    timerDiv.style.display = "none";
+    document.getElementById("finishBtn").style.display = "none";
+    
+    questions.forEach((q, i) => {
+      const qCard = document.getElementById(`qCard${i}`);
+      const options = qCard.querySelectorAll("label");
+      options.forEach((label, index) => {
+        const radioValue = index + 1;
+        label.querySelector("input").disabled = true;
+        if (radioValue === q.correctAnswer) {
+          label.style.background = "#d4edda"; 
+          label.style.border = "2px solid #28a745";
+        }
+        if (answers[i] === radioValue && answers[i] !== q.correctAnswer) {
+          label.style.background = "#f8d7da";
+          label.style.border = "2px solid #dc3545";
+        }
+      });
+      if(answers[i] === q.correctAnswer) score++;
+    });
+
+    // --- تعديل زر العودة هنا لضمان العمل ---
+    const resultHeader = document.createElement("div");
+    resultHeader.style = "padding:20px; background:#eee; border-radius:10px; text-align:center; margin-bottom:20px;";
+    resultHeader.innerHTML = `
+      <h3>نتيجتك هي: ${score} من ${questions.length}</h3>
+      <p>تم عرض نموذج الإجابة بالأسفل</p>
+      <button id="returnHomeBtn" style="padding:10px 20px; cursor:pointer; background:#007bff; color:white; border:none; border-radius:5px;">العودة للمواد</button>
+    `;
+    
+    mainContainer.insertBefore(resultHeader, qc);
+    
+    // ربط الحدث برمجياً بدلاً من onclick داخل الـ HTML
+    document.getElementById("returnHomeBtn").onclick = goHome;
+    
+    window.scrollTo(0,0);
   }
 }
 
@@ -708,4 +736,5 @@ else path=`${type}/${id}`;
 remove(ref(db,path)).then(()=>alert("تم الحذف"));
 
 };
+
 
