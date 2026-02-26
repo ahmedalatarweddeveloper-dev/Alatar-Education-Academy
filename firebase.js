@@ -148,8 +148,8 @@ signOutBtn.addEventListener("click", async () => {
 //======send review========
 const createreview = document.getElementById('sendreview');
   createreview.addEventListener("click", async () => {
-    const reviewuserInput = document.getElementById('reviewtitle');
-    const reviewtitleInput = document.getElementById('reviewwriter');
+    const reviewuserInput = document.getElementById('reviewwriter');
+    const reviewtitleInput = document.getElementById('reviewtitle');
     const reviewbodyInput = document.getElementById('reviewbody');
     const reviewuser = reviewuserInput.value.trim();
     const reviewtitle = reviewtitleInput.value.trim();
@@ -682,4 +682,5 @@ else if(type==='students') path=`users/student/${id}`;
 else if(subject && subject!=='null') path=`${type}/${subject}/${id}`;
 else path=`${type}/${id}`;
 remove(ref(db,path)).then(()=>alert("تم الحذف"));
+
 };
