@@ -554,12 +554,34 @@ async function startExam(subject,examId,examData){
   mainContainer.innerHTML=`
     <button id="backBtn">←</button>
     <h2>${examData.title}</h2>
-    <div class="timer" id="timer"></div>
+    <div class="timer" id="timer" style="font-weight:bold; color:red; margin:10px;"></div>
     <div id="questionsContainer" class="loading">جاري تحميل الأسئلة...</div>
     <button class="finish-btn" id="finishBtn">إنهاء الامتحان</button>
   `;
 
-  document.getElementById("backBtn").onclick = goHome;
+  // --- كود التيمر المضاف ---
+  let timeLeft = Math.floor(examData.duration * 60);
+  const timerDiv = document.getElementById("timer");
+
+  const timerInterval = setInterval(() => {
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    timerDiv.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("انتهى الوقت!");
+      finishExam(); // إنهاء تلقائي
+    }
+    timeLeft--;
+  }, 1000);
+
+  // تحديث زر الرجوع ليمسح التيمر
+  document.getElementById("backBtn").onclick = () => {
+    clearInterval(timerInterval);
+    goHome();
+  };
+  // -----------------------
 
   const snap = await get(ref(db,`exams/${subject}/${examId}/questions`));
   const questions = snap.val();
@@ -591,12 +613,14 @@ async function startExam(subject,examId,examData){
   document.getElementById("finishBtn").onclick=finishExam;
 
   async function finishExam(){
+    clearInterval(timerInterval); // إيقاف التيمر عند الإنهاء اليدوي
     let score=0;
     questions.forEach((q,i)=>{ if(answers[i]===q.correctAnswer) score++; });
     alert(`درجتك ${score} من ${questions.length}`);
     goHome();
   }
 }
+
 //================admin page============
 
 function initCounters(){
@@ -684,3 +708,4 @@ else path=`${type}/${id}`;
 remove(ref(db,path)).then(()=>alert("تم الحذف"));
 
 };
+
