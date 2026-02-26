@@ -20,7 +20,7 @@ if (localStorage.role == "teacher") {
     ulfoteacher.style.display= "block";
 }else if(localStorage.role == "student"){
     mainpage.style.display = "block";
-    reviewpage.style.display= "none"
+    reviewpage.style.display= "block"
 }else if(localStorage.role == "admin"){
     adminpage.style.display= "block";
     toadminpage.style.display= "block";
@@ -105,4 +105,5 @@ document.getElementById('toquizpage').addEventListener("click", () => {
     });
     quizpage.style.display="block"
 })
+
 
