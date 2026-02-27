@@ -62,6 +62,10 @@ body{
     margin: 20px;
 }
 
+#createuserpage .continer{
+    overflow:auto ;
+}
+
 
 @keyframes ani {
     from{
@@ -899,4 +903,5 @@ button:disabled{
 #adminpage .question-box { background:#f0f3f7; padding:10px 15px; border-radius:6px; margin-bottom:10px; border-left:4px solid var(--secondary); }
 #adminpage .question-box strong { display:block; margin-bottom:5px; color:var(--primary); }
 #adminpage .badge { background:#eef2f7; padding:4px 10px; border-radius:6px; font-size:0.85rem; color:#34495e; margin-left:5px; border:1px solid #dcdde1; }
+
 
